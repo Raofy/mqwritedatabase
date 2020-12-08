@@ -1,10 +1,16 @@
 
 spring:
 
-  jackson:                                 # JacksonĞòÁĞ»¯ÅäÖÃ
-    property-naming-strategy: SNAKE_CASE   # ÉèÖÃÊôĞÔÃüÃû²ßÂÔ,SNAKE_CASE-·µ»ØµÄjsonÍÕ·åÊ½×ªÏÂ»®Ïß£¬json bodyÏÂ»®Ïß´«µ½ºó¶Ë×Ô¶¯×ªÍÕ·åÊ½
-    date-format: yyyy-MM-dd HH:mm:ss       # È«¾ÖÉèÖÃ@JsonFormatµÄ¸ñÊ½pattern
-    time-zone: GMT+8                       # ÉèÖÃÊ±Çø
+  jackson:                                 # Jacksonåºåˆ—åŒ–é…ç½®
+    property-naming-strategy: SNAKE_CASE   # è®¾ç½®å±æ€§å‘½åç­–ç•¥,SNAKE_CASE-è¿”å›çš„jsoné©¼å³°å¼è½¬ä¸‹åˆ’çº¿ï¼Œjson bodyä¸‹åˆ’çº¿ä¼ åˆ°åç«¯è‡ªåŠ¨è½¬é©¼å³°å¼
+    date-format: yyyy-MM-dd HH:mm:ss       # å…¨å±€è®¾ç½®@JsonFormatçš„æ ¼å¼pattern
+    time-zone: GMT+8                       # è®¾ç½®æ—¶åŒº
+
+  rabbitmq:                                # RabbitMQ é…ç½®é¡¹ï¼Œå¯¹åº” RabbitProperties é…ç½®ç±»
+    host: 175.24.16.47                     # RabbitMQ æœåŠ¡çš„åœ°å€(è…¾è®¯äº‘ä¸Šåœ°å€)
+    port: 5672                             # RabbitMQ æœåŠ¡çš„ç«¯å£
+    username: guest                        # RabbitMQ æœåŠ¡çš„è´¦å·
+    password: guest                        # RabbitMQ æœåŠ¡çš„å¯†ç 
 
   datasource:
     druid:
@@ -12,27 +18,27 @@ spring:
       username: root
       password: 123456
       driver-class-name: com.mysql.jdbc.Driver
-      initial-size: 2                                             # ³õÊ¼»¯Ê±½¨Á¢ÎïÀíÁ¬½ÓµÄ¸öÊı¡£³õÊ¼»¯·¢ÉúÔÚÏÔÊ¾µ÷ÓÃinit·½·¨£¬»òÕßµÚÒ»´ÎgetConnectionÊ±
-      max-active: 5                                               # ×î´óÁ¬½Ó³ØÊıÁ¿
-      max-wait: 60000                                             # »ñÈ¡Á¬½ÓÊ±×î´óµÈ´ıÊ±¼ä£¬µ¥Î»ºÁÃë¡£ÅäÖÃÁËmaxWaitÖ®ºó£¬È±Ê¡ÆôÓÃ¹«Æ½Ëø£¬²¢·¢Ğ§ÂÊ»áÓĞËùÏÂ½µ£¬Èç¹ûĞèÒª¿ÉÒÔÍ¨¹ıÅäÖÃuseUnfairLockÊôĞÔÎªtrueÊ¹ÓÃ·Ç¹«Æ½Ëø¡£
-      min-idle: 1                                                 # ×îĞ¡Á¬½Ó³ØÊıÁ¿
-      time-between-eviction-runs-millis: 600000                   # ÓĞÁ½¸öº¬Òå£º 1) DestroyÏß³Ì»á¼ì²âÁ¬½ÓµÄ¼ä¸ôÊ±¼ä£¬Èç¹ûÁ¬½Ó¿ÕÏĞÊ±¼ä´óÓÚµÈÓÚminEvictableIdleTimeMillisÔò¹Ø±ÕÎïÀíÁ¬½Ó¡£ 2) testWhileIdleµÄÅĞ¶ÏÒÀ¾İ£¬ÏêÏ¸¿´testWhileIdleÊôĞÔµÄËµÃ÷
-      min-evictable-idle-time-millis: 300000                      # Á¬½Ó±£³Ö¿ÕÏĞ¶ø²»±»ÇıÖğµÄ×îĞ¡Ê±¼ä
-      test-while-idle: true                                       # ½¨ÒéÅäÖÃÎªtrue£¬²»Ó°ÏìĞÔÄÜ£¬²¢ÇÒ±£Ö¤°²È«ĞÔ¡£ÉêÇëÁ¬½ÓµÄÊ±ºò¼ì²â£¬Èç¹û¿ÕÏĞÊ±¼ä´óÓÚtimeBetweenEvictionRunsMillis£¬Ö´ĞĞvalidationQuery¼ì²âÁ¬½ÓÊÇ·ñÓĞĞ§¡£
-      test-on-borrow: true                                        # ÉêÇëÁ¬½ÓÊ±Ö´ĞĞvalidationQuery¼ì²âÁ¬½ÓÊÇ·ñÓĞĞ§£¬×öÁËÕâ¸öÅäÖÃ»á½µµÍĞÔÄÜ¡£
-      test-on-return: false                                       # ¹é»¹Á¬½ÓÊ±Ö´ĞĞvalidationQuery¼ì²âÁ¬½ÓÊÇ·ñÓĞĞ§£¬×öÁËÕâ¸öÅäÖÃ»á½µµÍĞÔÄÜ¡£
-      pool-prepared-statements: false                             # ÊÇ·ñ»º´æpreparedStatement£¬Ò²¾ÍÊÇPSCache¡£PSCache¶ÔÖ§³ÖÓÎ±êµÄÊı¾İ¿âĞÔÄÜÌáÉı¾Ş´ó£¬±ÈÈçËµoracle¡£ÔÚmysqlÏÂ½¨Òé¹Ø±Õ¡£
-      max-open-prepared-statements: 20                            # ´ò¿ªPSCache£¬²¢ÇÒÖ¸¶¨Ã¿¸öÁ¬½ÓÉÏPSCacheµÄ´óĞ¡
-      validation-query: SELECT 1                                  # ÓÃÀ´¼ì²âÁ¬½ÓÊÇ·ñÓĞĞ§µÄsql£¬ÒªÇóÊÇÒ»¸ö²éÑ¯Óï¾ä£¬³£ÓÃselect ¡®x¡¯¡£Èç¹ûvalidationQueryÎªnull£¬testOnBorrow¡¢testOnReturn¡¢testWhileIdle¶¼²»»áÆğ×÷ÓÃ¡£
-      validation-query-timeout: 500                               # µ¥Î»£ºÃë£¬¼ì²âÁ¬½ÓÊÇ·ñÓĞĞ§µÄ³¬Ê±Ê±¼ä¡£µ×²ãµ÷ÓÃjdbc Statement¶ÔÏóµÄvoid setQueryTimeout(int seconds)·½·¨
-      filters: stat                                               # ÊôĞÔÀàĞÍÊÇ×Ö·û´®£¬Í¨¹ı±ğÃûµÄ·½Ê½ÅäÖÃÀ©Õ¹²å¼ş£¬³£ÓÃµÄ²å¼şÓĞ£º ¼à¿ØÍ³¼ÆÓÃµÄfilter:stat ÈÕÖ¾ÓÃµÄfilter:log4j ·ÀÓùsql×¢ÈëµÄfilter:wall
+      initial-size: 2                                             # åˆå§‹åŒ–æ—¶å»ºç«‹ç‰©ç†è¿æ¥çš„ä¸ªæ•°ã€‚åˆå§‹åŒ–å‘ç”Ÿåœ¨æ˜¾ç¤ºè°ƒç”¨initæ–¹æ³•ï¼Œæˆ–è€…ç¬¬ä¸€æ¬¡getConnectionæ—¶
+      max-active: 5                                               # æœ€å¤§è¿æ¥æ± æ•°é‡
+      max-wait: 60000                                             # è·å–è¿æ¥æ—¶æœ€å¤§ç­‰å¾…æ—¶é—´ï¼Œå•ä½æ¯«ç§’ã€‚é…ç½®äº†maxWaitä¹‹åï¼Œç¼ºçœå¯ç”¨å…¬å¹³é”ï¼Œå¹¶å‘æ•ˆç‡ä¼šæœ‰æ‰€ä¸‹é™ï¼Œå¦‚æœéœ€è¦å¯ä»¥é€šè¿‡é…ç½®useUnfairLockå±æ€§ä¸ºtrueä½¿ç”¨éå…¬å¹³é”ã€‚
+      min-idle: 1                                                 # æœ€å°è¿æ¥æ± æ•°é‡
+      time-between-eviction-runs-millis: 600000                   # æœ‰ä¸¤ä¸ªå«ä¹‰ï¼š 1) Destroyçº¿ç¨‹ä¼šæ£€æµ‹è¿æ¥çš„é—´éš”æ—¶é—´ï¼Œå¦‚æœè¿æ¥ç©ºé—²æ—¶é—´å¤§äºç­‰äºminEvictableIdleTimeMillisåˆ™å…³é—­ç‰©ç†è¿æ¥ã€‚ 2) testWhileIdleçš„åˆ¤æ–­ä¾æ®ï¼Œè¯¦ç»†çœ‹testWhileIdleå±æ€§çš„è¯´æ˜
+      min-evictable-idle-time-millis: 300000                      # è¿æ¥ä¿æŒç©ºé—²è€Œä¸è¢«é©±é€çš„æœ€å°æ—¶é—´
+      test-while-idle: true                                       # å»ºè®®é…ç½®ä¸ºtrueï¼Œä¸å½±å“æ€§èƒ½ï¼Œå¹¶ä¸”ä¿è¯å®‰å…¨æ€§ã€‚ç”³è¯·è¿æ¥çš„æ—¶å€™æ£€æµ‹ï¼Œå¦‚æœç©ºé—²æ—¶é—´å¤§äºtimeBetweenEvictionRunsMillisï¼Œæ‰§è¡ŒvalidationQueryæ£€æµ‹è¿æ¥æ˜¯å¦æœ‰æ•ˆã€‚
+      test-on-borrow: true                                        # ç”³è¯·è¿æ¥æ—¶æ‰§è¡ŒvalidationQueryæ£€æµ‹è¿æ¥æ˜¯å¦æœ‰æ•ˆï¼Œåšäº†è¿™ä¸ªé…ç½®ä¼šé™ä½æ€§èƒ½ã€‚
+      test-on-return: false                                       # å½’è¿˜è¿æ¥æ—¶æ‰§è¡ŒvalidationQueryæ£€æµ‹è¿æ¥æ˜¯å¦æœ‰æ•ˆï¼Œåšäº†è¿™ä¸ªé…ç½®ä¼šé™ä½æ€§èƒ½ã€‚
+      pool-prepared-statements: false                             # æ˜¯å¦ç¼“å­˜preparedStatementï¼Œä¹Ÿå°±æ˜¯PSCacheã€‚PSCacheå¯¹æ”¯æŒæ¸¸æ ‡çš„æ•°æ®åº“æ€§èƒ½æå‡å·¨å¤§ï¼Œæ¯”å¦‚è¯´oracleã€‚åœ¨mysqlä¸‹å»ºè®®å…³é—­ã€‚
+      max-open-prepared-statements: 20                            # æ‰“å¼€PSCacheï¼Œå¹¶ä¸”æŒ‡å®šæ¯ä¸ªè¿æ¥ä¸ŠPSCacheçš„å¤§å°
+      validation-query: SELECT 1                                  # ç”¨æ¥æ£€æµ‹è¿æ¥æ˜¯å¦æœ‰æ•ˆçš„sqlï¼Œè¦æ±‚æ˜¯ä¸€ä¸ªæŸ¥è¯¢è¯­å¥ï¼Œå¸¸ç”¨select â€˜xâ€™ã€‚å¦‚æœvalidationQueryä¸ºnullï¼ŒtestOnBorrowã€testOnReturnã€testWhileIdleéƒ½ä¸ä¼šèµ·ä½œç”¨ã€‚
+      validation-query-timeout: 500                               # å•ä½ï¼šç§’ï¼Œæ£€æµ‹è¿æ¥æ˜¯å¦æœ‰æ•ˆçš„è¶…æ—¶æ—¶é—´ã€‚åº•å±‚è°ƒç”¨jdbc Statementå¯¹è±¡çš„void setQueryTimeout(int seconds)æ–¹æ³•
+      filters: stat                                               # å±æ€§ç±»å‹æ˜¯å­—ç¬¦ä¸²ï¼Œé€šè¿‡åˆ«åçš„æ–¹å¼é…ç½®æ‰©å±•æ’ä»¶ï¼Œå¸¸ç”¨çš„æ’ä»¶æœ‰ï¼š ç›‘æ§ç»Ÿè®¡ç”¨çš„filter:stat æ—¥å¿—ç”¨çš„filter:log4j é˜²å¾¡sqlæ³¨å…¥çš„filter:wall
 
-      stat-view-servlet:                                          # ÅäÖÃdruid¼à¿Ø
-       enabled: true
-       url-pattern: /druid/*                                      # ·ÃÎÊµØÖ·¹æÔò
-       reset-enable: true                                         # ÊÇ·ñÔÊĞíÇå¿ÕÍ³¼ÆÊı¾İ
-       login-username: admin                                      # ¼à¿ØÒ³ÃæµÄµÇÂ¼ÕË»§
-       login-password: admin                                      # ¼à¿ØÒ³ÃæµÄµÇÂ¼ÃÜÂë
+      stat-view-servlet:                                          # é…ç½®druidç›‘æ§
+        enabled: true
+        url-pattern: /druid/*                                      # è®¿é—®åœ°å€è§„åˆ™
+        reset-enable: true                                         # æ˜¯å¦å…è®¸æ¸…ç©ºç»Ÿè®¡æ•°æ®
+        login-username: admin                                      # ç›‘æ§é¡µé¢çš„ç™»å½•è´¦æˆ·
+        login-password: admin                                      # ç›‘æ§é¡µé¢çš„ç™»å½•å¯†ç 
 
 
 mybatis:
@@ -40,11 +46,11 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
 
-mybatis-plus:                                                     # mybatis-plusÈÕÖ¾´òÓ¡ÅäÖÃ
+mybatis-plus:                                                     # mybatis-plusæ—¥å¿—æ‰“å°é…ç½®
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   global-config:
     db-config:
-      #logic-delete-field: flag  # È«¾ÖÂß¼­É¾³ıµÄÊµÌå×Ö¶ÎÃû(since 3.3.0,ÅäÖÃºó¿ÉÒÔºöÂÔ²»ÅäÖÃ²½Öè2)
-      logic-delete-value: 1                                       # Âß¼­ÒÑÉ¾³ıÖµ(Ä¬ÈÏÎª 1)
-      logic-not-delete-value: 0                                   # Âß¼­Î´É¾³ıÖµ(Ä¬ÈÏÎª 0)
+      #logic-delete-field: flag  # å…¨å±€é€»è¾‘åˆ é™¤çš„å®ä½“å­—æ®µå(since 3.3.0,é…ç½®åå¯ä»¥å¿½ç•¥ä¸é…ç½®æ­¥éª¤2)
+      logic-delete-value: 1                                       # é€»è¾‘å·²åˆ é™¤å€¼(é»˜è®¤ä¸º 1)
+      logic-not-delete-value: 0                                   # é€»è¾‘æœªåˆ é™¤å€¼(é»˜è®¤ä¸º 0)
